@@ -1,0 +1,111 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WildChat</title>
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="http://cdn.wilddog.com/js/client/0.2.4/wilddogio.js"></script>
+   	<script type="text/javascript">
+		// wilddog cloud
+	  	var Wio = require('wio');
+	  	var ref = new Wio('http://wildchat/chat');
+	  	
+		$(document).ready(function() {
+			// 登录
+			$("#login").bind("click", function() {
+				var email = $("#email");
+				var password = $("#password");
+				var lerr = $("#l-err");
+				lerr.css('visibility','hidden');
+				
+				if(!validate(email, password)){
+					return ;
+				}
+				ref.authWithPassword({email:email.val(), password:password.val()}, function(err, data){
+					if(err){
+						lerr.css('visibility','visible');
+						lerr.html(err.message);
+						return ;
+					}
+					$.cookie('uid', data.uid, { expires: 1 });
+					window.location.href = "chat.html";
+				});
+			});
+			
+			// 注册
+			$("#register").bind("click", function() {
+				var email = $("#email");
+				var password = $("#password");
+				var lerr = $("#l-err");
+				lerr.css('visibility','hidden');
+				
+				if(!validate(email, password)){
+					return ;
+				}
+				
+				// 创建wilddog 用户
+				ref.createUser({email:email.val(), password:password.val() }, function(err, data){
+					if(err){
+						lerr.css('visibility','visible');
+						lerr.html(err.message);
+						return ;
+					}
+					var array = email.val().split("@");			
+					ref.child("user/" + data.uid).set({email:email.val(), name:array[0]});
+					$.cookie('uid', data.uid, { expires: 1 });
+					window.location.href = "chat.html";
+				});
+			});
+			// end
+		});
+	  	
+	  	// 邮箱校验
+	  	function checkEmail(email) {
+	  		return /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(email);
+	  	}
+	  	
+	 	// 校验表单
+		function validate(email, password){
+	 		var eerr = $("#e-err");
+	 		var perr = $("#p-err");
+	 		
+			if(email.val() == ''){
+				eerr.css('visibility','visible');
+				return false;
+			}
+			
+			if(!checkEmail(email.val())){
+				eerr.css('visibility','visible');
+				return false;
+			}
+			eerr.css('visibility','hidden');
+			
+			if(password.val() == ''){
+				perr.css('visibility','visible');
+				return false;
+			}
+			perr.css('visibility','hidden');
+			
+			return true;
+		}
+	  	
+	</script>
+</head>
+<body>
+    <div class="login">
+    	<div class="error" id="l-err" ></div>
+    	<div class="input"><input type="text" id="email" placeholder="请输入您的电子邮箱"/></div>
+    	<div class="error" id="e-err" >邮箱格式错误</div>
+    	<div class="input"><input type="text" id="password" placeholder="请输入您的密码"/></div>
+    	<div class="error" id="p-err">密码错误，密码长度必须包含至少6个字符</div>
+    	<div class="button">
+    		<button id="login">登&nbsp;录</button>&nbsp;&nbsp;<button id="register" >注&nbsp;册</button>
+    	</div>
+    </div>
+    <div class="bottom">©2015 WildChat . All rights reserved.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Powered by Wilddog . </div>
+</body>
+</html>

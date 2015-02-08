@@ -1,0 +1,418 @@
+body,html{
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font: Microsoft Yahei, Lucida Grande, Tahoma, Arial, sans-serif;
+    font-size: 12px;
+}
+
+input[type=text]{
+	border: 1px solid #E7E5E5;
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px; 
+	border-radius: 3px; 
+}
+/***************login*********************/
+.login{
+	position: absolute;
+	top: 50%;
+	left:50%;
+	width: 300px;
+	height: 220px;
+	margin-left: -300px;
+	margin-top: -125px;
+	background: url('../images/login_bg.gif') no-repeat left 10px;
+	padding-left: 300px;
+}
+.login input[type=text]{
+	width: 270px;
+	height: 33px;
+	line-height: 33px;
+	padding-left: 10px;
+	font-size: 14px;
+}
+.login .error{
+	visibility:hidden;
+	color: #ff3232;
+	padding-left: 10px;
+	height: 35px;
+	padding-top: 5px;
+}
+.login .button{
+	text-align: center;
+}
+.login .button button{
+	border: none;
+	-moz-border-radius: 5px; 
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	width: 75px;
+	height: 35px;
+	background-color: #33b332;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+/*******************chat*************************/
+.header{
+	height: 40px;
+	line-height: 40px;
+	background: url('../images/logo.gif') no-repeat 15px bottom;
+	text-align: right;
+	padding-right: 15px;
+	color: #9f9f9f;
+}
+.main{
+	width: 720px;
+	height: 540px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -360px;
+	margin-top: -270px;
+	border: 1px solid #E7E5E5;
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.main > div{
+	float: left;
+}
+.chat{
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 540px;
+	background-color: #F2F2F2;
+}
+.chat .content{
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 50px;
+	border-bottom: 1px solid #e7e5e5;
+	overflow-y:auto;
+}
+.list{
+	position: absolute;
+	left: 540px;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #2f2f2f;
+}
+.meassge{
+	overflow: hidden;
+	clear: both;
+	margin-top: 30px;
+}
+.meassge  div{
+	float: left;
+}
+.meassge.me div{
+	float: right;
+}
+.meassge .user{
+	width: 105px;
+}
+.meassge .user .name{
+	width: 58px;
+	margin-left: 4px;
+	text-align: right;
+	color: #9f9f9f;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	height: 28px;
+	line-height: 28px;
+}
+.meassge.me .user .name{
+	text-align: left;
+}
+.meassge .user .photo{
+	background-color: #e7e5e5;
+    border: 1px solid #9f9f9f;
+    border-radius: 28px;
+    color: #9f9f9f;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    width: 28px;
+    margin-left: 5px;
+}
+.meassge.me .user .photo,.meassge.me .words .text,.meassge.me .words .arrow{
+	background-color: #b4eb7c;
+}
+.meassge.me .user .photo{
+	margin-left: 0;
+	margin-right: 5px;
+}
+.meassge .words{
+	color: #2f2f2f;
+    float: none;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0 115px;
+    position: relative;
+}
+.meassge.me .words{
+	float: none;
+}
+.meassge .words .text{
+	background-color: #fff;
+	padding: 10px 20px;
+	border-radius: 3px;
+    
+}
+.meassge .words .arrow{
+	width: 10px;
+	height: 10px;
+	-webkit-transform:rotate(45deg);
+    -moz-transform:rotate(45deg);
+    -o-transform:rotate(45deg);
+    transform:rotate(45deg);
+    position: absolute;
+    left: -5px;
+    background-color: #fff;
+    top: 10px;
+}
+.meassge.me .words .arrow{
+	left: auto;
+	right: -5px;
+}
+.line{
+	margin: 30px 115px 0;
+	position: relative;
+}
+hr{
+	height: 1px;
+	border: none;
+	border-top: 1px solid #9f9f9f;
+	margin: 0;
+}
+.line .time{
+	position: absolute;
+	height: 20px;
+	background-color: #F2F2F2;
+	top: -7px;
+	left: 130px;
+	padding: 0 5px;
+}
+.send{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+}
+.send .words{
+    left: 10px;
+    position: absolute;
+    right: 140px;
+    top: 8px;
+}
+.send textarea{
+	border: 1px solid #9f9f9f;
+    height: 35px;
+    resize: none;
+    width: 100%;
+}
+.send button{
+	width: 80px;
+	height: 30px;
+	border: 1px solid #9f9f9f;
+	font-size: 14px;
+	color: #2f2f2f;
+	margin-left: 30px;
+	float: right;
+	margin-top: 10px;
+	margin-right: 30px;
+	cursor: pointer;
+	font-weight: bold;
+	border-radius: 5px;
+}
+.send button:hover{
+	background-color: #33b332;
+	color: #fff;
+}
+.list .title{
+	background: url('../images/user.png') 10px center no-repeat;
+	border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 14px;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 50px;
+    margin-bottom: 10px;
+}
+.list .friend{
+	color: #fff;
+	padding-left: 15px;
+	line-height: 22px;
+	clear: both;
+	overflow: hidden;
+}
+.list .friend > div{
+	float: left;
+}
+.list .friend .update{
+	margin-left: 20px;
+	color: #b4eb7c;
+	cursor: pointer;
+}
+.bottom{
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	color: #9f9f9f;
+	padding-bottom: 10px;
+}
+
+.hide{
+	display: none;
+}
+button{
+	cursor: pointer;
+}
+
+.dialog{
+	position: absolute;
+	z-index: 10px;
+	left: 0;
+	right:0;
+	bottom: 0px;
+	top: 0px;
+	background-color: #000;
+	opacity: 0.5;
+}
+.window{
+	position: absolute;
+	width: 300px;
+	height: 156px;
+	left: 50%;
+	top: 50%;
+	background-color:#fff;
+	border-radius: 3px;
+	margin-top: -78px;
+	margin-left: -150px;
+	padding: 0 20px;
+}
+.window .title{
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	font-weight: bold;
+	border-bottom: 1px solid #E7E5E5;
+	color: #9f9f9f;
+}
+.window .content{
+	padding: 20px 0;
+}
+.window .content input{
+	height: 26px;
+	width: 300px;
+	border: 1px solid #9f9f9f;
+}
+.window  button{
+	width: 65px;
+	height: 30px;
+	border: none;
+	background-color: #33b332;
+	color: #fff;
+	padding: 0;
+	border-radius: 5px;
+}
+.confirm{
+	text-align: center;
+}
+.confirm .message{
+	padding: 40px 0;
+	color: #33b332;
+	font-size: 14px;
+}
+.confirm button{
+	background-color: #F2F2F2;
+	border: 1px solid ##E7E5E5;
+	color: #9f9f9f;
+}
+
+.listbutton{
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	background: url('../images/user.png') no-repeat center center #2f2f2f;
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	z-index: 10;
+
+}
+
+.mobile{
+	overflow: hidden;
+	font-size: 18px;
+}
+.mobile .header,.mobile .bottom,.mobile .list{
+	display: none;
+}
+.mobile .listbutton{
+	display: block;
+}
+.mobile .main,.mobile .chat,.mobile .list{
+	width: 100%;
+	height:100%;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: 0;
+	overflow: hidden;
+}
+.mobile .window{
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	margin: 0;
+}
+.mobile .user{
+	height: 68px;
+	position: relative;
+	width: 70px;
+}
+.mobile .user .name,.mobile .meassge.me .user .name{
+	position: absolute;
+	bottom: 0;
+	text-align: center;
+}
+.meassge.me .user .name{
+	right: 0;
+	margin: 0;
+}
+.mobile .user .photo{
+	width: 40px;
+	height: 40px;
+	line-height: 36px;
+	border-radius: 40px;
+	margin-left: 9px;
+	font-size: 26px;
+}
+.mobile .meassge.me .user .photo{
+	margin-right: 9px;
+}
+.mobile .line{
+	margin:  30px 70px 0;
+	height: 20px;
+}
+.mobile .line .time{
+	left: 100px;
+}
+.mobile .meassge .words{
+	margin: 0 70px;
+}
+
