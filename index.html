@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="css/app.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.cookie.js"></script>
-    <script src="http://cdn.wilddog.com/js/client/0.2.4/wilddogio.js"></script>
+    <script src="http://cdn.wilddog.com/js/client/0.3.0/wilddogio.min.js"></script>
    	<script type="text/javascript">
 		// wilddog cloud
-	  	var Wio = require('wio');
-	  	var ref = new Wio('http://wildchat/chat');
+	  	var ref = Wilddog('https://wildchat.wilddogio.com/chat');
 	  	
 		$(document).ready(function() {
 			// 登录
