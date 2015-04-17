@@ -9,12 +9,12 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script src="js/jquery.cookie.js"></script>
-    <script src="http://cdn.wilddog.com/js/client/0.3.0/wilddogio.min.js"></script>
+    <script src="http://cdn.wilddog.com/js/client/0.3.0/wilddogio.debug.js"></script>
     
     <script type="text/javascript">
-  		var Wio = require('wio');
-  		var ref = new Wio('http://wildchat/chat');
-  		
+        // wilddog cloud
+	  	var ref = new Wilddog('https://wildchat.wilddogio.com/chat');
+        
   		var userId = $.cookie('uid');
   		var userName = '';
   		var memberNum = 0;
@@ -32,7 +32,13 @@
 					if(data.userId == userId){
 						main.addClass('me');
 					}
-					$('<div class="user"><div class="name">'+data.userName+'</div><div class="photo">'+data.userName.slice(0,1)+'</div></div>').appendTo(main);
+                    try{
+                        console.log(data);
+                        $('<div class="user"><div class="name">'+data.userName+'</div><div class="photo">'+data.userName.slice(0,1)+'</div></div>').appendTo(main);
+                    } catch(e) {
+                        console.log(e);
+                        console.log(data);
+                    }
 					$('<div class="words"><div class="arrow"></div><div class="text">'+data.content+'</div></div>').appendTo(main);
 				});
 				scrollToBottom();
@@ -41,7 +47,7 @@
   			// pull成员信息 
   			ref.child("user").on('childAdded', function(snapshot) {
 				snapshot.forEach(function (key, data){
-					var d = '<div class="friend"><div class="name">'+ data.name +'</div>';
+					var d = '<div class="friend"><div id="'+ key +'" class="name">'+ data.name +'</div>';
 					if(key == userId){
 						d = d + '<div class="update">修改昵称</div>'
 					}	
@@ -75,6 +81,27 @@
 				$("#member_num").html(memberNum);
 			});
   			
+            // push 成员名称修改
+            ref.child("user").on('childChanged', function(snapshot) {
+                  snapshot.forEach(function(key,data){
+                      try{
+                        $('.friend #' + key.replace(/(:|\.)/g, "\\$1")).text(data.name);
+                      } catch(err) {
+                          console.log("childChanged modify name :" + JSON.stringify(key) + " data:"+ JSON.stringify(data));
+                      }
+                  });
+            }); 
+             // push 删除
+            ref.child("user").on('childRemoved', function(snapshot) {
+                  snapshot.forEach(function(key,data){
+                      try{
+                          $('.friend #' + key.replace(/(:|\.)/g, "\\$1")).parent().remove();
+                      } catch(err) {
+                          console.log("childRemoved modify name :" + JSON.stringify(key) + " data:"+ JSON.stringify(data));
+                      }
+                  });
+            });  
+            
   			// push 消息
   			$('#send').bind('click',function() {
   				ref.child("message").push({content:$('#content').val(), userName:$("#myself").text(), userId:userId});
