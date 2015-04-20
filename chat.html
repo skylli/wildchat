@@ -27,7 +27,8 @@
   			
   			// pull聊天信息
   			ref.child("message").on('childAdded', function(snapshot) {
-				snapshot.forEach(function (key, data){
+                    var key=snapshot.key()
+                    var data=snapshot.val()
 					var main = $('<div class="meassge"></div>').appendTo($('#chat_content'));
 					if(data.userId == userId){
 						main.addClass('me');
@@ -40,13 +41,13 @@
                         console.log(data);
                     }
 					$('<div class="words"><div class="arrow"></div><div class="text">'+data.content+'</div></div>').appendTo(main);
-				});
-				scrollToBottom();
+				    scrollToBottom();
 			});
   			
   			// pull成员信息 
   			ref.child("user").on('childAdded', function(snapshot) {
-				snapshot.forEach(function (key, data){
+                    var key=snapshot.key();
+                    var data=snapshot.val()
 					var d = '<div class="friend"><div id="'+ key +'" class="name">'+ data.name +'</div>';
 					if(key == userId){
 						d = d + '<div class="update">修改昵称</div>'
@@ -77,29 +78,28 @@
 					}
 					
 					memberNum ++;
-				});
 				$("#member_num").html(memberNum);
 			});
   			
             // push 成员名称修改
             ref.child("user").on('childChanged', function(snapshot) {
-                  snapshot.forEach(function(key,data){
+                      var key=snapshot.key()
+                      var data=snapshot.val()
                       try{
                         $('.friend #' + key.replace(/(:|\.)/g, "\\$1")).text(data.name);
                       } catch(err) {
                           console.log("childChanged modify name :" + JSON.stringify(key) + " data:"+ JSON.stringify(data));
                       }
-                  });
             }); 
              // push 删除
             ref.child("user").on('childRemoved', function(snapshot) {
-                  snapshot.forEach(function(key,data){
+                      var key=snapshot.key()
+                      var data=snapshot.val()
                       try{
                           $('.friend #' + key.replace(/(:|\.)/g, "\\$1")).parent().remove();
                       } catch(err) {
                           console.log("childRemoved modify name :" + JSON.stringify(key) + " data:"+ JSON.stringify(data));
                       }
-                  });
             });  
             
   			// push 消息
