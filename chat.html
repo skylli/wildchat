@@ -26,7 +26,7 @@
   			});
   			
   			// pull聊天信息
-  			ref.child("message").on('childAdded', function(snapshot) {
+  			ref.child("message").on('child_added', function(snapshot) {
                     var key=snapshot.key()
                     var data=snapshot.val()
 					var main = $('<div class="meassge"></div>').appendTo($('#chat_content'));
@@ -45,7 +45,7 @@
 			});
   			
   			// pull成员信息 
-  			ref.child("user").on('childAdded', function(snapshot) {
+  			ref.child("user").on('child_added', function(snapshot) {
                     var key=snapshot.key();
                     var data=snapshot.val()
 					var d = '<div class="friend"><div id="'+ key +'" class="name">'+ data.name +'</div>';
@@ -82,7 +82,7 @@
 			});
   			
             // push 成员名称修改
-            ref.child("user").on('childChanged', function(snapshot) {
+            ref.child("user").on('child_changed', function(snapshot) {
                       var key=snapshot.key()
                       var data=snapshot.val()
                       try{
@@ -92,7 +92,7 @@
                       }
             }); 
              // push 删除
-            ref.child("user").on('childRemoved', function(snapshot) {
+            ref.child("user").on('child_removed', function(snapshot) {
                       var key=snapshot.key()
                       var data=snapshot.val()
                       try{
